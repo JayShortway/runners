@@ -1,10 +1,12 @@
 name: Runner
-on: [repository_dispatch]
+on: 
+  repository_dispatch:
+    types: created
 jobs:
-  build:
+  runner:
     runs-on: ubuntu-latest
     steps:
-      - name: Runner
+      - name: "${{ github.event.client_payload.build_name }} (${{ github.event.client_payload.build_id }})"
         uses: edersonbrilhante/gitlab-runner-action@main
         with:
           registration-token: "${{ github.event.client_payload.registration_token }}"
