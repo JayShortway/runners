@@ -6,14 +6,10 @@ jobs:
   runner:
     runs-on: ubuntu-latest
     steps:
-      - name: Mask authentication token
-        run: echo "::add-mask::$GITLAB_AUTH_TOKEN"
-        env:
-          GITLAB_AUTH_TOKEN: ${{ github.event.client_payload.authentication_token }}
       - name: "${{ github.event.client_payload.build_name }} (${{ github.event.client_payload.build_id }})"
         uses: edersonbrilhante/gitlab-runner-action@main
         with:
-          registration-token: "${{ github.event.client_payload.authentication_token }}"
+          registration-token: "${{ secrets.AUTH_TOKEN_RUNNER_DOCKER }}"
           docker-image: "docker:latest"
           name: ${{ github.run_id }}
           tag-list: "docker"
