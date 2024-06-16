@@ -1,6 +1,6 @@
-name: Runner
+name: Docker runner
 on: 
-  repository_dispatch
+  repository_dispatch:
     types: created
 jobs:
   runner:
@@ -12,4 +12,4 @@ jobs:
           registration-token: "${{ github.event.client_payload.registration_token }}"
           docker-image: "docker:19.03.12"
           name: ${{ github.run_id }}
-          tag-list: "gha, ubuntu"
+          tag-list: "docker"
