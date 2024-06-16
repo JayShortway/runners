@@ -1,7 +1,7 @@
 name: Runner
 on: 
   repository_dispatch
-    #types: created
+    types: created
 jobs:
   runner:
     runs-on: ubuntu-latest
