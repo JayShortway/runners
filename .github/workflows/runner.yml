@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Mask authentication token
-        run: echo "::add-mask::${{ github.event.client_payload.authentication_token }}"
+        run: echo "::add-mask::$GITLAB_AUTH_TOKEN"
+        env:
+          GITLAB_AUTH_TOKEN: ${{ github.event.client_payload.authentication_token }}
       - name: "${{ github.event.client_payload.build_name }} (${{ github.event.client_payload.build_id }})"
         uses: edersonbrilhante/gitlab-runner-action@main
         with:
